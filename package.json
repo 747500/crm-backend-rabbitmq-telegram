@@ -9,6 +9,8 @@
   "author": "",
   "license": "WTFPL",
   "dependencies": {
+    "async": "^3.2.0",
+    "moment": "^2.29.1",
     "node-telegram-bot-api": "^0.51.0"
   }
 }
