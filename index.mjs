@@ -16,4 +16,21 @@ Services.Run()
 	services.telegram.onText(/^\/start/, commands.Start)
 	services.telegram.onText(/^\/auth\s+(\S+)/, commands.Auth)
 
+	services.amqp.onMessage((message, next) => {
+		console.log('* amqp message:', message)
+
+		services.telegram.sendMessage(
+			message.to,
+			message.text
+		)
+		.then(() => {
+			next()
+		})
+
+	})
+
+})
+.catch(err => {
+	logger.Errors(err)
+	process.exit(1)
 })

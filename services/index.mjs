@@ -1,10 +1,10 @@
 
 
-import rabbitmq from './rabbitmq.mjs'
+import amqp from './amqp/index.mjs'
 import telegram from './telegram.mjs'
 
 const Services = [
-	rabbitmq,
+	amqp,
 	telegram,
 ]
 
