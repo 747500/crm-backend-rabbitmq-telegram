@@ -1,4 +1,4 @@
-# crm-tg-bot
+# crm-telegram-bot
 
 Telegram bot for https://github.com/747500/crm
 
