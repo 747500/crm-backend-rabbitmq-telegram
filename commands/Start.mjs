@@ -1,14 +1,9 @@
 
 
 
-function Start(bot) {
+function Start (message, match) {
 
-
-	return (message, match) => {
-
-		console.log('* commands/Start:', message)
-
-	}
+	console.log('* commands/Start:', message)
 
 }
 

@@ -7,8 +7,9 @@ import async from 'async'
 import CONFIG from '../config.mjs'
 
 function Messages (msg) {
+
     const fromId = msg.from.id
-    const userFolder = `${CONFIG.loggerDir}/${fromId}`
+    const userFolder = `${CONFIG.telegram.loggerDir}/${fromId}`
     const ts = moment().format('YYYY-MM-DD')
     const userHistoryFile = `${userFolder}/${ts}`
 

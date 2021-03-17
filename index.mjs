@@ -1,29 +1,19 @@
 
-
-import TelegramBot from 'node-telegram-bot-api'
-
 import * as logger from './logger/index.mjs'
 import * as commands from './commands/index.mjs'
 
+import Services from './services/index.mjs'
+
 import CONFIG from './config.mjs'
 
-// Setup polling way
-const bot = new TelegramBot(
-    CONFIG.Token,
-    {
-        polling: {
-            interval: 2000,
-            autoStart: true,
-            params: {
-                timeout: 55
-            }
-        },
-    }
-)
+Services.Run()
+.then(services => {
 
-bot.on('polling_error', logger.Errors(bot))
-bot.on('message', logger.Messages)
+	services.telegram.on('polling_error', logger.Errors)
+	services.telegram.on('message', logger.Messages)
 
 
-bot.onText(/^\/start/, commands.Start(bot))
-bot.onText(/^\/auth\s+(\S+)/, commands.Auth(bot))
+	services.telegram.onText(/^\/start/, commands.Start)
+	services.telegram.onText(/^\/auth\s+(\S+)/, commands.Auth)
+
+})

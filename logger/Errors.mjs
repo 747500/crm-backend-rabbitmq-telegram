@@ -1,13 +1,8 @@
 
 
-function Errors(bot) {
+function Errors (err) {
 
-
-	return (err) => {
-
-		console.error(err)
-
-	}
+	console.error(err)
 
 }
 

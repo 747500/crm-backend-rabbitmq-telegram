@@ -1,13 +1,8 @@
 
 
-function Auth(bot) {
+function Auth (message, match) {
 
-
-	return (message, match) => {
-
-		console.log('* commands/Auth:', message)
-
-	}
+	console.log('* commands/Auth:', message)
 
 }
 
