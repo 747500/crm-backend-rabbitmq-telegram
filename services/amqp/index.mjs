@@ -15,7 +15,7 @@ AMQPService.prototype.auth = function (telegramId, cookie) {
 
 	return this.channel.sendToQueue(
 		CONFIG.amqp.authQueue,
-		Buffer.from(telegramId.toString()),
+		Buffer.from(cookie.toString()),
 		{
 			persistent: true,
 			correlationId: telegramId.toString(),
@@ -38,7 +38,7 @@ AMQPService.prototype.onMessage = function (callback) {
 
 			callback(
 				{
-					to: message.properties.correlation_id.toString(),
+					to: message.properties.correlationId.toString(),
 					text: message.content.toString(),
 				},
 				() => {
