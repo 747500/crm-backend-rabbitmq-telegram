@@ -9,25 +9,30 @@ import CONFIG from './config.mjs'
 Services.Run()
 .then(services => {
 
-	services.telegram.on('polling_error', logger.Errors)
-	services.telegram.on('message', logger.Messages)
+	return [
+
+		services.telegram.on('polling_error', logger.Errors),
+		services.telegram.on('message', logger.Messages),
 
 
-	services.telegram.onText(/^\/start/, commands.Start)
-	services.telegram.onText(/^\/auth\s+(\S+)/, commands.Auth)
+		services.telegram.onText(/^\/start/, commands.Start),
+		services.telegram.onText(/^\/auth\s+(\S+)/, commands.Auth),
 
-	services.amqp.onMessage((message, next) => {
-		console.log('* amqp message:', message)
+		services.amqp.onMessage((message, next) => {
+			console.log('* amqp message:', message)
 
-		services.telegram.sendMessage(
-			message.to,
-			message.text
-		)
-		.then(() => {
-			next()
+			services.telegram.sendMessage(
+				message.to,
+				message.text
+			)
+			.then(() => {
+				next()
+			})
+			.catch(logger.Errors)
+
 		})
 
-	})
+	].reduce((accum, next) => accum.then(next), Promise.resolve())
 
 })
 .catch(err => {
