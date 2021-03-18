@@ -11,7 +11,7 @@ Services.Run()
 
 	return [
 
-		services.telegram.on('polling_error', logger.Errors),
+		services.telegram.on('polling_error', logger.Errors('tg poll:')),
 		services.telegram.on('message', logger.Messages),
 
 
@@ -19,7 +19,7 @@ Services.Run()
 		services.telegram.onText(/^\/auth\s+(\S+)/, commands.Auth),
 
 		services.amqp.onMessage((message, next) => {
-			console.log('* amqp message:', message)
+			console.log('* amqp onMessage callback:', message)
 
 			services.telegram.sendMessage(
 				message.to,
@@ -28,7 +28,7 @@ Services.Run()
 			.then(() => {
 				next()
 			})
-			.catch(logger.Errors)
+			.catch(logger.Errors('amqp2tg:'))
 
 		})
 
@@ -36,6 +36,6 @@ Services.Run()
 
 })
 .catch(err => {
-	logger.Errors(err)
+	logger.Errors('fatal:')(err)
 	process.exit(1)
 })

@@ -1,9 +1,12 @@
 
 
-function Errors (err) {
+function Errors (prefix){
 
-	console.error(err)
+	return err => {
 
+		console.error('!', prefix, err)
+
+	}
 }
 
 

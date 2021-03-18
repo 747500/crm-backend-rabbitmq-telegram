@@ -11,7 +11,7 @@ function AMQPService (channel) {
 
 AMQPService.prototype.auth = function (telegramId, cookie) {
 
-	console.log('AMQPService.auth:', telegramId, cookie)
+	console.log('* AMQPService.auth:', telegramId, cookie)
 
 	return this.channel.sendToQueue(
 		CONFIG.amqp.authQueue,
@@ -34,7 +34,7 @@ AMQPService.prototype.onMessage = function (callback) {
 		CONFIG.amqp.botQueue.name,
 		message => {
 
-			console.log('* consumed:', message)
+			console.log('* AMQPService.onMessage consumed:', message)
 
 			callback(
 				{
