@@ -1,5 +1,5 @@
 {
-  "name": "crm-tg-bot",
+  "name": "crm-backend-rabbitmq-telegram",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
