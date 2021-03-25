@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "node index.mjs"
+    "serve": "NTBA_FIX_319=1 node index.mjs"
   },
-  "author": "",
+  "author": "Serge R",
   "license": "WTFPL",
   "dependencies": {
     "amqplib": "^0.7.1",
